@@ -10,6 +10,7 @@ const app = express();
 const publicDirectory = path.join(__dirname, "../public");
 const viewsPath = path.join(__dirname, "../templates/views");
 const partialPath = path.join(__dirname, "../templates/partials");
+let weatherData = {};
 
 hbs.registerPartials(partialPath);
 
@@ -25,6 +26,10 @@ app.get("/", (request, response) => {
         title: "Weather App",
         author: "Jody Richardson"
     });
+});
+
+app.get("/forecast", (request, response) => {
+    response.render(weatherData);
 });
 
 app.get("/about", (request, response) => {
