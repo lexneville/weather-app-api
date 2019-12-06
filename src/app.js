@@ -4,13 +4,18 @@
 const express = require('express');
 const path = require("path");
 const hbs = require("hbs");
-const myForecast = require("./weatherMap"); // Allows myForecast() to be called from this file.
+// Allows myForecast() to be called from this file.
+const myForecast = require("./weatherMap"); 
 
 const app = express();
 const publicDirectory = path.join(__dirname, "../public");
 const viewsPath = path.join(__dirname, "../templates/views");
 const partialPath = path.join(__dirname, "../templates/partials");
-let weatherData = {};
+
+let weatherData;
+let userCity;
+
+
 
 hbs.registerPartials(partialPath);
 
@@ -19,7 +24,18 @@ app.use(express.static(publicDirectory));
 app.set("view engine", "hbs");
 app.set('views', viewsPath);
 
-myForecast("ouagadougou", "bf", "metric"); // Added to check the function has been imported correctly
+myForecast("manchester", "uk", "metric", (response) => {
+    weatherData = response;
+    userCity = weatherData.name;
+    console.log(userCity);
+          
+}); 
+
+
+
+console.log(`Outside function ${userCity}`);
+
+
 
 app.get("/", (request, response) => {
     response.render("index", {
@@ -29,7 +45,10 @@ app.get("/", (request, response) => {
 });
 
 app.get("/forecast", (request, response) => {
-    response.render(weatherData);
+    response.render("forecast", {
+        data: weatherData,
+        weather: weatherData.weather[0].description
+    });
 });
 
 app.get("/about", (request, response) => {
@@ -43,8 +62,7 @@ app.get("/contact", (request, response) => {
 app.get('/api', (request, response) => {
     response.send(
         {
-            forecast: "It is sunny",
-            location: "Manchester"
+        data: weatherData,
         }
     )
 })
@@ -60,6 +78,8 @@ app.get("*", (request, response) => {
 app.listen(3000, () => {
     console.log("Server is running!");
 });
+
+
 
 // install nodemon to auto update server on file changes.
 // terminal command "sudo install -g nodemon" 

@@ -1,17 +1,15 @@
 const request = require("request");
 
-let data = {};
 
-const forecast = (city, country, units) => {
 
+const forecast = (city, country, units, callback) => {
     const encodedCityName = encodeURIComponent(city);
     const encodedCountryName = encodeURIComponent(country);
 
     const weatherMapUrl = `http://api.openweathermap.org/data/2.5/weather?q=${encodedCityName},${encodedCountryName}&units=${units}&APPID=f37fdcaa1c983d7dac860b0dc0d0b9b6`;
     
     request({url: weatherMapUrl, json: true}, (error, response) => {
-        data = response.body;
-        console.log(response.body);
+        // console.log(response.body);
         // const data = JSON.parse(response.body); // Unnecessary if we add the json: true arguement to the request call.
         // console.log(data);
         if (error) {
@@ -21,13 +19,13 @@ const forecast = (city, country, units) => {
         } else {
             console.log(`Today we have mainly ${response.body.weather[0].description}`);
             console.log(`The current temperature in ${response.body.name} is ${response.body.main.temp} degrees Centigrade`);
-            data = response.body;
-            console.log("Next json is stored in data");
-            console.log(data);
-        }      
+            callback(response.body)        
+        }     
     });
+    
+    
 }
 
-module.exports = data;
 module.exports = forecast;
+// exports.weatherData = weatherData;
 
