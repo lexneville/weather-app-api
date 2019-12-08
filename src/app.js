@@ -24,12 +24,12 @@ app.use(express.static(publicDirectory));
 app.set("view engine", "hbs");
 app.set('views', viewsPath);
 
-myForecast("manchester", "uk", "metric", (response) => {
-    weatherData = response;
-    userCity = weatherData.name;
-    console.log(userCity);
+// myForecast("manchester", "uk", "metric", (response) => {
+//     weatherData = response;
+//     userCity = weatherData.name;
+//     console.log(userCity);
           
-}); 
+// }); 
 
 
 
@@ -46,8 +46,8 @@ app.get("/", (request, response) => {
 
 app.get("/forecast", (request, response) => {
     response.render("forecast", {
-        data: weatherData,
-        weather: weatherData.weather[0].description
+        // data: weatherData,
+        // weather: weatherData.weather[0].description
     });
 });
 
@@ -59,13 +59,41 @@ app.get("/contact", (request, response) => {
     response.send("<h1>Contact Pages</h1>");
 });
 
-app.get('/api', (request, response) => {
-    response.send(
-        {
-        data: weatherData,
-        }
-    )
-})
+// app.get('/api', (request, response) => {
+//     response.send(
+//         {
+//         data: weatherData,
+//         }
+//     )
+// })
+
+app.get('/api', (req, res) => {
+    console.log(req.query);
+    
+    if(!req.query.city) {
+        res.send({
+            error: 'Please enter a city name'
+        })
+    } else {
+
+        myForecast(req.query.city, "uk", "metric", (response) => {
+            if (response.error) {
+                res.send({
+                    error: response.error
+                })
+            } else {
+                res.send({
+                    city: req.query.city,
+                    country: req.query.country,
+                    temp: response.main.temp
+                })
+            }
+        });
+        
+        
+    }
+}
+)
 
 app.get("*", (request, response) => {
     response.send("<h1>404 Your Page Does Not Exist!</h1>")

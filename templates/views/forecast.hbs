@@ -8,21 +8,30 @@
 
     <title>Document</title>
 </head>
-    <script type="text/javascript" src="/js/main.js"></script> 
 <body>
 
     {{>nav}}
 
-    <input id="userCityInput" type="text" placeholder="Enter a City">
+    <form>
+        <input type="text" placeholder="city">
+        <button type="submit">Search</button>
+    </form>
+
+    <h1 id="title">Please enter a city</h1>
+    <h1 id="city">City: </h1>
+    <h2 id="temp">Temp(C): </h2>
+
+    {{!-- <input id="userCityInput" type="text" placeholder="Enter a City">
     <button id="submit" type="submit" onClick="getInput()">Submit</button>
 
     <h1>City = {{data.name}}</h1>
     <p>Temp = {{data.main.temp}}</p>
     <p>Pressure = {{data.main.pressure}}</p>
     {{!-- <p>Weather = {{data.weather[0].description}}</p> --}}
-    <p>Weather = {{weather}}</p>
-    <p>Latitude = {{data.coord.lat}}</p> 
+    {{!-- <p>Weather = {{weather}}</p>
+    <p>Latitude = {{data.coord.lat}}</p>  --}} 
  
+    <script src="/js/main.js"></script> 
 </body>
 
 </html>
