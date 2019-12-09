@@ -5,11 +5,82 @@
 }
 
 body {
-    background-color: orange;
+    background-image: url(../img/simon_weather.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 nav {
-    background-color: brown;
+    background-color: black;
     color: white;
     padding: 20px 50px;
+    font-size: 50px;
+    text-shadow: grey 2px 2px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
 }
+
+#mainContent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+
+#forecast {
+    margin: 50px;
+    width:700px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 30%);
+    padding: 20px;
+    
+}
+
+#title {
+    padding-top: 10px;
+}
+
+h1 {
+    padding-top: 10px;
+}
+
+h2 {
+    padding-top: 20px;
+}
+
+#submit {
+    width: 100px;
+    background-color: seagreen;
+    color: white;
+}
+
+#input {
+    padding: 10px;
+}
+
+#input:focus, #submit:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    border: 2px solid rgba(81, 203, 238, 1);
+}
+
+#input, #submit {
+    margin: 10px;
+    height: 50px;
+    border-radius: 15px;
+    border: 2px solid black;
+    font-size: 20px;
+}
+
+#form {
+    display: flex;
+    flex-direction: row;
+}
+
+
+

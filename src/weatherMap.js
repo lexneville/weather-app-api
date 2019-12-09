@@ -1,7 +1,6 @@
 const request = require("request");
 
 
-
 const forecast = (city, country, units, callback) => {
     const encodedCityName = encodeURIComponent(city);
     const encodedCountryName = encodeURIComponent(country);

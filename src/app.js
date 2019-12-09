@@ -12,7 +12,6 @@ const publicDirectory = path.join(__dirname, "../public");
 const viewsPath = path.join(__dirname, "../templates/views");
 const partialPath = path.join(__dirname, "../templates/partials");
 
-let weatherData;
 let userCity;
 
 
@@ -72,7 +71,7 @@ app.get('/api', (req, res) => {
     
     if(!req.query.city) {
         res.send({
-            error: 'Please enter a city name'
+            error: "SIMON says Please enter a city name!"
         })
     } else {
 
@@ -85,15 +84,18 @@ app.get('/api', (req, res) => {
                 res.send({
                     city: req.query.city,
                     country: req.query.country,
-                    temp: response.main.temp
+                    temp: response.main.temp,
+                    weather: response.weather[0].description,
+                    windSpeed: response.wind.speed, 
+                    cloudCover: response.clouds.all,
+                    tempMin: response.main.temp_min,
+                    tempMax: response.main.temp_max,
+                    allData: response,
                 })
             }
-        });
-        
-        
+        });                
     }
-}
-)
+})
 
 app.get("*", (request, response) => {
     response.send("<h1>404 Your Page Does Not Exist!</h1>")

@@ -11,15 +11,21 @@
 <body>
 
     {{>nav}}
-
-    <form>
-        <input type="text" placeholder="city">
-        <button type="submit">Search</button>
-    </form>
-
-    <h1 id="title">Please enter a city</h1>
-    <h1 id="city">City: </h1>
-    <h2 id="temp">Temp(C): </h2>
+    <div id="mainContent">
+        <div id="forecast">
+            <form id="form">
+                <input id="input" type="text" placeholder="city">
+                <button id="submit" type="submit">Search</button>
+            </form>
+            <h1 id="title">Simon says "Please enter a UK city"</h1>
+            <h1 id="city">City: </h1>
+            <h2 id="tempRange">Temp Range: </h2>
+            <h2 id="temp">Current Temp: </h2>
+            <h2 id="description">Weather: </h2>
+            <h2 id="wind">Wind Speed: </h2>
+            <h2 id="cloud">Cloud Cover: </h2>
+        </div>
+    </div>
 
     {{!-- <input id="userCityInput" type="text" placeholder="Enter a City">
     <button id="submit" type="submit" onClick="getInput()">Submit</button>
